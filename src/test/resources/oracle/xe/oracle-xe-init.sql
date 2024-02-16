@@ -1,7 +1,7 @@
 ALTER SESSION SET CONTAINER=XEPDB1;
 
--- For an oracle-xe image, now the default user and schema is "TEST".
-CREATE TABLE TEST.all_char_types_table (
+-- For an oracle-xe image, the default user and schema is "TEST".
+CREATE TABLE all_char_types_table (
     char_column char(100),
     varchar2_column varchar2(100),
     varchar_column varchar(100),
@@ -9,7 +9,7 @@ CREATE TABLE TEST.all_char_types_table (
     nvarchar2_column nvarchar2(100)
 );
 
-INSERT INTO TEST.all_char_types_table (
+INSERT INTO all_char_types_table (
     char_column,
     varchar2_column,
     varchar_column,
