@@ -1,8 +1,10 @@
-package oracle.xe;
+package oracle.free;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.OracleContainer;
+import org.testcontainers.containers.wait.strategy.LogMessageWaitStrategy;
+import org.testcontainers.containers.wait.strategy.WaitStrategy;
+import org.testcontainers.oracle.OracleContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -12,18 +14,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
 @Testcontainers
 @Slf4j
-class XeTest {
+class FreeTest {
 
     private static final String TABLE_NAME = "all_char_types_table";
 
+    // The LogMessageWaitStrategy for the Oracle XE container was set to 240 seconds, but with the Oracle Free Container,
+    // it has been reduced to 60 seconds, which is too short.
+    // We need to use a longer wait strategy.
+    private static final WaitStrategy WAIT_STRATEGY = new LogMessageWaitStrategy()
+            .withRegEx(".*DATABASE IS READY TO USE!.*\\s")
+            .withTimes(1)
+            .withStartupTimeout(Duration.of(240, ChronoUnit.SECONDS));
+
     @Container
-    public OracleContainer container = new OracleContainer("gvenzl/oracle-xe:21-slim-faststart")
-            .withInitScript("oracle/xe/oracle-xe-init.sql");
+    public OracleContainer container = new OracleContainer("gvenzl/oracle-free:23-slim-faststart")
+            .waitingFor(WAIT_STRATEGY)
+            .withInitScript("oracle/free/oracle-free-init.sql");
 
     @Test
     void selectTest() {
