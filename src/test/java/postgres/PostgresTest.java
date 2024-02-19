@@ -1,8 +1,8 @@
-package oracle.xe;
+package postgres;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.OracleContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -17,17 +17,18 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @Testcontainers
 @Slf4j
-class XeTest {
+class PostgresTest {
 
     private static final String TABLE_NAME = "all_char_types_table";
 
+    @SuppressWarnings("resource")
     @Container
-    public OracleContainer container = new OracleContainer("gvenzl/oracle-xe:21-slim-faststart")
-            .withInitScript("oracle/xe/oracle-xe-init.sql");
+    public PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:11.19-bullseye")
+            .withInitScript("postgres/postgres-init.sql");
 
     @Test
     void selectTest() {
-        // jdbc:oracle:thin:@localhost:15028/xepdb1
+        // jdbc:postgresql://localhost:15313/test?loggerLevel=OFF
         String jdbcUrl = container.getJdbcUrl();
         // test
         String username = container.getUsername();

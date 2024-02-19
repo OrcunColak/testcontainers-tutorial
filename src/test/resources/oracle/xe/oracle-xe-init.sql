@@ -1,6 +1,6 @@
+-- This script is run by sys user so we need to change user first
 ALTER SESSION SET CONTAINER=XEPDB1;
 
--- For an oracle-xe image, the default user and schema is "TEST".
 CREATE TABLE all_char_types_table (
     char_column char(100),
     varchar2_column varchar2(100),

@@ -1,3 +1,4 @@
+-- This script is run by sys user so we need to change user first
 ALTER SESSION SET CONTAINER=FREEPDB1;
 
 -- For an oracle-xe image, the default user and schema is "TEST".

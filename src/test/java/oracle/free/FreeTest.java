@@ -42,8 +42,11 @@ class FreeTest {
 
     @Test
     void selectTest() {
+        // jdbc:oracle:thin:@localhost:14973/freepdb1
         String jdbcUrl = container.getJdbcUrl();
+        // test
         String username = container.getUsername();
+        // test
         String password = container.getPassword();
 
         log.info("Connection jdbcUrl: {} , username: {} , password : {}", jdbcUrl, username, password);
