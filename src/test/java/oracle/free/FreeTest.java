@@ -7,6 +7,7 @@ import org.testcontainers.containers.wait.strategy.WaitStrategy;
 import org.testcontainers.oracle.OracleContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.MountableFile;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,6 +37,7 @@ class FreeTest {
     @Container
     public OracleContainer container = new OracleContainer("gvenzl/oracle-free:23-slim-faststart")
             .waitingFor(WAIT_STRATEGY)
+            .withCopyFileToContainer(MountableFile.forClasspathResource("oracle/free/oracle-free-create-user.sql"), "/container-entrypoint-startdb.d/init.sql")
             .withInitScript("oracle/free/oracle-free-init.sql");
 
     @Test
