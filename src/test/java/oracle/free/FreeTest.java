@@ -37,8 +37,8 @@ class FreeTest {
     @Container
     public OracleContainer container = new OracleContainer("gvenzl/oracle-free:23-slim-faststart")
             .waitingFor(WAIT_STRATEGY)
-            .withCopyFileToContainer(MountableFile.forClasspathResource("oracle/free/oracle-free-create-user.sql"), "/container-entrypoint-startdb.d/init.sql")
-            .withInitScript("oracle/free/oracle-free-init.sql");
+            .withCopyFileToContainer(MountableFile.forClasspathResource("oracle/free/sys-user-startdb.sql"), "/container-entrypoint-startdb.d/init.sql")
+            .withInitScript("oracle/free/sys-user-init.sql");
 
     @Test
     void selectTest() {
