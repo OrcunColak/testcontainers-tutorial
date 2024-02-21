@@ -2,6 +2,7 @@ package postgres;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.testcontainers.jdbc.ContainerDatabaseDriver;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.Connection;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @Slf4j
 class PostgresStartWithJdbcTest {
 
+    // Oracle : "jdbc:tc:oracle:21-slim-faststart:thin:@:?TC_DAEMON=true";
     private static final String JDBC_URL = "jdbc:tc:postgresql:9.6.8:///testdb";
     private static final String USER = "test";
     private static final String PASSWORD = "test";
@@ -34,6 +36,9 @@ class PostgresStartWithJdbcTest {
         } catch (Exception exception) {
             log.error("Exception ", exception);
             fail("Test failed with exception " + exception.getMessage());
+        }
+         finally {
+            ContainerDatabaseDriver.killContainer(JDBC_URL);
         }
     }
 
