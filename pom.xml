@@ -12,9 +12,11 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testcontainers.version>1.19.5</testcontainers.version>
+
         <oracle.version>23.3.0.23.09</oracle.version>
         <postgresql.version>42.7.1</postgresql.version>
         <mssql.version>12.4.2.jre11</mssql.version>
+        <kafka.version>3.6.1</kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -130,6 +132,24 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>mongodb</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Kafka -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>kafka</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+            <version>${kafka.version}</version>
         </dependency>
 
     </dependencies>

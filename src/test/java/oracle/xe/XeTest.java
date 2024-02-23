@@ -22,17 +22,17 @@ class XeTest {
     private static final String TABLE_NAME = "all_char_types_table";
 
     @Container
-    private final OracleContainer container = new OracleContainer("gvenzl/oracle-xe:21-slim-faststart")
+    private static final OracleContainer ORACLE_CONTAINER = new OracleContainer("gvenzl/oracle-xe:21-slim-faststart")
             .withInitScript("oracle/xe/oracle-xe-init.sql");
 
     @Test
     void selectTest() {
         // jdbc:oracle:thin:@localhost:15028/xepdb1
-        String jdbcUrl = container.getJdbcUrl();
+        String jdbcUrl = ORACLE_CONTAINER.getJdbcUrl();
         // test
-        String username = container.getUsername();
+        String username = ORACLE_CONTAINER.getUsername();
         // test
-        String password = container.getPassword();
+        String password = ORACLE_CONTAINER.getPassword();
 
         log.info("Connection jdbcUrl: {} , username: {} , password : {}", jdbcUrl, username, password);
 

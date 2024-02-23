@@ -35,7 +35,7 @@ class FreeTest {
             .withStartupTimeout(Duration.of(240, ChronoUnit.SECONDS));
 
     @Container
-    private final OracleContainer container = new OracleContainer("gvenzl/oracle-free:23-slim-faststart")
+    private static final OracleContainer ORACLE_CONTAINER = new OracleContainer("gvenzl/oracle-free:23-slim-faststart")
             .waitingFor(WAIT_STRATEGY)
             .withCopyFileToContainer(MountableFile.forClasspathResource("oracle/free/sys-user-startdb.sql"), "/container-entrypoint-startdb.d/init.sql")
             .withInitScript("oracle/free/sys-user-init.sql");
@@ -43,11 +43,11 @@ class FreeTest {
     @Test
     void selectTest() {
         // jdbc:oracle:thin:@localhost:14973/freepdb1
-        String jdbcUrl = container.getJdbcUrl();
+        String jdbcUrl = ORACLE_CONTAINER.getJdbcUrl();
         // test
-        String username = container.getUsername();
+        String username = ORACLE_CONTAINER.getUsername();
         // test
-        String password = container.getPassword();
+        String password = ORACLE_CONTAINER.getPassword();
 
         log.info("Connection jdbcUrl: {} , username: {} , password : {}", jdbcUrl, username, password);
 

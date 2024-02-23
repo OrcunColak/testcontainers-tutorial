@@ -11,6 +11,6 @@ import org.testcontainers.utility.DockerImageName;
 public class MongoTest {
 
     @Container
-    private final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
+    private static final MongoDBContainer MONGO_DB_CONTAINER = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
 
 }
