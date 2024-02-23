@@ -35,7 +35,7 @@ class FreeTest {
             .withStartupTimeout(Duration.of(240, ChronoUnit.SECONDS));
 
     @Container
-    public OracleContainer container = new OracleContainer("gvenzl/oracle-free:23-slim-faststart")
+    private final OracleContainer container = new OracleContainer("gvenzl/oracle-free:23-slim-faststart")
             .waitingFor(WAIT_STRATEGY)
             .withCopyFileToContainer(MountableFile.forClasspathResource("oracle/free/sys-user-startdb.sql"), "/container-entrypoint-startdb.d/init.sql")
             .withInitScript("oracle/free/sys-user-init.sql");

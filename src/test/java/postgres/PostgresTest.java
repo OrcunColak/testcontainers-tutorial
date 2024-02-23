@@ -23,7 +23,7 @@ class PostgresTest {
 
     @SuppressWarnings("resource")
     @Container
-    public PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:11.19-bullseye")
+    private final PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:11.19-bullseye")
             .withInitScript("postgres/postgres-init.sql");
 
     @Test

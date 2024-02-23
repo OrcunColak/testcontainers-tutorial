@@ -22,7 +22,7 @@ class XeTest {
     private static final String TABLE_NAME = "all_char_types_table";
 
     @Container
-    public OracleContainer container = new OracleContainer("gvenzl/oracle-xe:21-slim-faststart")
+    private final OracleContainer container = new OracleContainer("gvenzl/oracle-xe:21-slim-faststart")
             .withInitScript("oracle/xe/oracle-xe-init.sql");
 
     @Test
