@@ -15,7 +15,7 @@ import java.util.Properties;
 
 @Testcontainers
 @Slf4j
-public class KafkaTest {
+class KafkaTest {
 
     private static final Network NETWORK = Network.newNetwork();
     @Container
