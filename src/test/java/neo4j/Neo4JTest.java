@@ -14,6 +14,7 @@ import org.testcontainers.utility.DockerImageName;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Testcontainers
 @Slf4j
@@ -31,7 +32,8 @@ class Neo4JTest {
         String neo4jUri = NEO_4_J_CONTAINER.getBoltUrl();
         String neo4jPassword = NEO_4_J_CONTAINER.getAdminPassword();
 
-        assertNotNull(neo4jPassword);
+        assertNotNull(neo4jUri);
+        assertNull(neo4jPassword);
 
         try (Driver driver = GraphDatabase.driver(NEO_4_J_CONTAINER.getBoltUrl(), AuthTokens.none());
              Session session = driver.session()) {
