@@ -22,20 +22,20 @@ class Neo4JTest {
 
     @SuppressWarnings("resource")
     @Container
-    private static final Neo4jContainer<?> NEO_4_J_CONTAINER = new Neo4jContainer<>(DockerImageName.parse("neo4j:5"))
+    private static final Neo4jContainer<?> CONTAINER = new Neo4jContainer<>(DockerImageName.parse("neo4j:5"))
             // .withRandomPassword()
             .withoutAuthentication()
             .withStartupTimeout(Duration.ofMinutes(2));
 
     @Test
     void testNeo4jContainer() {
-        String neo4jUri = NEO_4_J_CONTAINER.getBoltUrl();
-        String neo4jPassword = NEO_4_J_CONTAINER.getAdminPassword();
+        String neo4jUri = CONTAINER.getBoltUrl();
+        String neo4jPassword = CONTAINER.getAdminPassword();
 
         assertNotNull(neo4jUri);
         assertNull(neo4jPassword);
 
-        try (Driver driver = GraphDatabase.driver(NEO_4_J_CONTAINER.getBoltUrl(), AuthTokens.none());
+        try (Driver driver = GraphDatabase.driver(CONTAINER.getBoltUrl(), AuthTokens.none());
              Session session = driver.session()) {
         }
 

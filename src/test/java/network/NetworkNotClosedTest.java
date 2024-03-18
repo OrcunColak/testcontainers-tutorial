@@ -27,16 +27,16 @@ class NetworkNotClosedTest {
 
     @SuppressWarnings("resource")
     @Container
-    private static final PostgreSQLContainer<?> postgresContainer = new PostgreSQLContainer<>("postgres:11.19-bullseye")
+    private static final PostgreSQLContainer<?> CONTAINER = new PostgreSQLContainer<>("postgres:11.19-bullseye")
             .withNetwork(network)
             .withNetworkAliases("postgres-db");
 
     @Test
     void testDatabaseConnectionWithoutClosingNetwork() throws SQLException {
         // Get JDBC URL, username, and password from the PostgreSQL container
-        String jdbcUrl = postgresContainer.getJdbcUrl();
-        String username = postgresContainer.getUsername();
-        String password = postgresContainer.getPassword();
+        String jdbcUrl = CONTAINER.getJdbcUrl();
+        String username = CONTAINER.getUsername();
+        String password = CONTAINER.getPassword();
 
         // Make a database connection
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {

@@ -19,7 +19,7 @@ class KafkaTest {
 
     private static final Network NETWORK = Network.newNetwork();
     @Container
-    private static final KafkaContainer KAFKA_CONTAINER =
+    private static final KafkaContainer CONTAINER =
             new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.5.2"))
                     .withNetwork(NETWORK);
 
@@ -32,13 +32,13 @@ class KafkaTest {
                     .withEnv("SCHEMA_REGISTRY_HOST_NAME", "schema-registry")
                     .withEnv("SCHEMA_REGISTRY_LISTENERS", "http://0.0.0.0:8081")
                     .withEnv("SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS",
-                            "PLAINTEXT://" + KAFKA_CONTAINER.getNetworkAliases().get(0) + ":9092")
+                            "PLAINTEXT://" + CONTAINER.getNetworkAliases().get(0) + ":9092")
                     .waitingFor(Wait.forHttp("/subjects").forStatusCode(200));
 
     @Test
     void testConnect() {
         Properties properties = new Properties();
-        properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_CONTAINER.getBootstrapServers());
+        properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, CONTAINER.getBootstrapServers());
         properties.put("schema.registry.url", "http://" + SCHEMA_REGISTRY.getHost() +
                                                  ":" + SCHEMA_REGISTRY.getFirstMappedPort());
         // ...

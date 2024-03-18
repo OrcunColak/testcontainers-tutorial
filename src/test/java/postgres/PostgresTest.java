@@ -23,17 +23,17 @@ class PostgresTest {
 
     @SuppressWarnings("resource")
     @Container
-    private static final PostgreSQLContainer<?> POSTGRE_SQL_CONTAINER = new PostgreSQLContainer<>("postgres:11.19-bullseye")
+    private static final PostgreSQLContainer<?> CONTAINER = new PostgreSQLContainer<>("postgres:11.19-bullseye")
             .withInitScript("postgres/postgres-init.sql");
 
     @Test
     void selectTest() {
         // jdbc:postgresql://localhost:15313/test?loggerLevel=OFF
-        String jdbcUrl = POSTGRE_SQL_CONTAINER.getJdbcUrl();
+        String jdbcUrl = CONTAINER.getJdbcUrl();
         // test
-        String username = POSTGRE_SQL_CONTAINER.getUsername();
+        String username = CONTAINER.getUsername();
         // test
-        String password = POSTGRE_SQL_CONTAINER.getPassword();
+        String password = CONTAINER.getPassword();
 
         log.info("Connection jdbcUrl: {} , username: {} , password : {}", jdbcUrl, username, password);
 

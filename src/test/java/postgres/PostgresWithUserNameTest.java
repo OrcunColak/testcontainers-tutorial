@@ -23,7 +23,7 @@ class PostgresWithUserNameTest {
 
     @SuppressWarnings("resource")
     @Container
-    private static final PostgreSQLContainer<?> POSTGRES_SQL_CONTAINER = new PostgreSQLContainer<>("postgres:11.19-bullseye")
+    private static final PostgreSQLContainer<?> CONTAINER = new PostgreSQLContainer<>("postgres:11.19-bullseye")
             .withDatabaseName("my-db-name")
             .withUsername("user")
             .withPassword("pass")
@@ -33,11 +33,11 @@ class PostgresWithUserNameTest {
     @Test
     void selectTest() {
         // jdbc:postgresql://localhost:15313/test?loggerLevel=OFF
-        String jdbcUrl = POSTGRES_SQL_CONTAINER.getJdbcUrl();
+        String jdbcUrl = CONTAINER.getJdbcUrl();
         // test
-        String username = POSTGRES_SQL_CONTAINER.getUsername();
+        String username = CONTAINER.getUsername();
         // test
-        String password = POSTGRES_SQL_CONTAINER.getPassword();
+        String password = CONTAINER.getPassword();
 
         log.info("Connection jdbcUrl: {} , username: {} , password : {}", jdbcUrl, username, password);
 
