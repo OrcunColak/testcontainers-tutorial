@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @Testcontainers
 @Slf4j
-class PostgresTest {
+class PostgresWithInitScriptTest {
 
     private static final String TABLE_NAME = "all_char_types_table";
 
